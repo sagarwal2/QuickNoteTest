@@ -14,7 +14,10 @@ import com.cognizant.quicknote.screen.BaseActivity;
 public class CreateEditNoteActivity extends BaseActivity implements CreateEditNoteActivityFragment.OnFragmentInteractionListener{
 
     private static final String NOTE_ITEM = "CreateEditNoteActivity#NOTE_ITEM";
+    private static final String FRAGMENT_TAG = CreateEditNoteActivityFragment.class.getSimpleName();
     private QuickNoteItem quickNoteItem;
+    private enum NOTE_ACTION {SAVE, DELETE};
+    private NOTE_ACTION note_action = NOTE_ACTION.DELETE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,30 +30,45 @@ public class CreateEditNoteActivity extends BaseActivity implements CreateEditNo
             setTitle(getString(R.string.create_note));
         }
 
-        setContentFragment(CreateEditNoteActivityFragment.newInstance(quickNoteItem));
+        setContentFragment(CreateEditNoteActivityFragment.newInstance(quickNoteItem), FRAGMENT_TAG);
         setBackEnabled(true);
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_create_edit_note, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        CreateEditNoteActivityFragment editNoteActivityFragment = (CreateEditNoteActivityFragment)getSupportFragmentManager()
+                .findFragmentByTag(FRAGMENT_TAG);
         switch(item.getItemId()) {
             case R.id.action_delete:
-                CreateEditNoteActivityFragment editNoteActivityFragment = (CreateEditNoteActivityFragment)getSupportFragmentManager()
-                        .findFragmentByTag(CreateEditNoteActivityFragment.class.getSimpleName());
-                if(null != editNoteActivityFragment  && editNoteActivityFragment.isInLayout()) {
+                if(null != editNoteActivityFragment  && editNoteActivityFragment.isVisible()) {
                     editNoteActivityFragment.deleteNote();
+                }
+
+                return true;
+
+            case R.id.action_save:
+                if(null != editNoteActivityFragment  && editNoteActivityFragment.isVisible()) {
+                    editNoteActivityFragment.saveNote();
                 }
 
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        switch (note_action) {
+            case SAVE:
+                getMenuInflater().inflate(R.menu.menu_create_save_note, menu);
+                return true;
+
+            case DELETE:
+                getMenuInflater().inflate(R.menu.menu_create_edit_note, menu);
+                return true;
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     public static Intent createIntent(Context context, @Nullable QuickNoteItem noteItem) {
@@ -66,11 +84,13 @@ public class CreateEditNoteActivity extends BaseActivity implements CreateEditNo
 
     @Override
     public void onNoteEdited() {
-
+        note_action = NOTE_ACTION.SAVE;
+        invalidateOptionsMenu();
     }
 
     @Override
     public void onNoteSaved() {
-
+        note_action = NOTE_ACTION.DELETE;
+        invalidateOptionsMenu();
     }
 }

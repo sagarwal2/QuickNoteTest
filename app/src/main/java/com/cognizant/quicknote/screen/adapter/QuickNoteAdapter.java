@@ -15,6 +15,7 @@ import java.util.List;
 
 public class QuickNoteAdapter extends RecyclerView.Adapter<QuickNoteAdapter.NoteViewHolder> {
     private List<QuickNoteItem> noteItemList;
+    private OnItemClickListener mItemClickListener;
 
     public QuickNoteAdapter(@NonNull List<QuickNoteItem> noteItemList) {
         this.noteItemList = noteItemList;
@@ -44,18 +45,34 @@ public class QuickNoteAdapter extends RecyclerView.Adapter<QuickNoteAdapter.Note
         return noteItemList.size();
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder {
-        protected final TextView noteTitle;
-        protected final TextView noteBody;
-        protected final TextView noteDateModified;
+    public interface OnItemClickListener {
+        void onItemClick(QuickNoteItem noteItem);
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+
+    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView noteTitle;
+        public TextView noteBody;
+        public TextView noteDateModified;
 
         public NoteViewHolder(View itemView) {
             super(itemView);
             this.noteTitle = (TextView) itemView.findViewById(R.id.note_title);
             this.noteBody = (TextView) itemView.findViewById(R.id.note_line_body);
             this.noteDateModified = (TextView) itemView.findViewById(R.id.note_modified);
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(noteItemList.get(getAdapterPosition()));
+            }
+        }
     }
 
 }

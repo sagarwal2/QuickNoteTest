@@ -15,6 +15,7 @@ import com.cognizant.quicknote.model.QuickNoteItem;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -114,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, quickNote.getTitle());
         values.put(COLUMN_CONTENT, quickNote.getContent());
-        values.put(COLUMN_DATE_MODIFIED, DateFormat.getDateTimeInstance().format(quickNote.getModified()));
+        values.put(COLUMN_DATE_MODIFIED, DateFormat.getDateTimeInstance().format(new Date()));
 
         if(hasNote(quickNote.getId())) {
             // updating row

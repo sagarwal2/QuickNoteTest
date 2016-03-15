@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
-        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.1\\res\\layout\\design_layout_snackbar.xml"
-    },
-    {
         "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\note_list_row.xml",
         "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\src\\main\\res\\layout\\note_list_row.xml"
+    },
+    {
+        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
+        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.1\\res\\layout\\design_layout_snackbar.xml"
     },
     {
         "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
@@ -36,20 +36,20 @@
         "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.1\\res\\layout\\design_layout_tab_icon.xml"
     },
     {
-        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
-        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.1\\res\\layout\\design_navigation_item_separator.xml"
+        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
         "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_action_mode_bar.xml"
+        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.1\\res\\layout\\design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_screen_content_include.xml"
     },
     {
         "merged": "D:\\SouravAgarwal\\Projects\\QuickNote\\quick-note\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_note_list.xml",

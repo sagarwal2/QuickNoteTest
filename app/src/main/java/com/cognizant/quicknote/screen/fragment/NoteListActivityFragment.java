@@ -3,6 +3,7 @@ package com.cognizant.quicknote.screen.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * NoteList fragment containing list of notes.
  */
-public class NoteListActivityFragment extends Fragment implements DataListener {
+public class NoteListActivityFragment extends Fragment implements DataListener, QuickNoteAdapter.OnItemClickListener {
 
     private OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -49,7 +50,10 @@ public class NoteListActivityFragment extends Fragment implements DataListener {
 
         // Initialize recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.note_list_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
     }
@@ -62,7 +66,9 @@ public class NoteListActivityFragment extends Fragment implements DataListener {
             @Override
             public void onSuccess(List<QuickNoteItem> noteItems) {
                 if(mRecyclerView.getAdapter() == null) {
-                    mRecyclerView.setAdapter(new QuickNoteAdapter(noteItems));
+                    final QuickNoteAdapter quickNoteAdapter = new QuickNoteAdapter(noteItems);
+                    quickNoteAdapter.SetOnItemClickListener(NoteListActivityFragment.this);
+                    mRecyclerView.setAdapter(quickNoteAdapter);
                 } else {
                     ((QuickNoteAdapter)mRecyclerView.getAdapter()).setNoteList(noteItems);
                 }
@@ -91,6 +97,11 @@ public class NoteListActivityFragment extends Fragment implements DataListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onItemClick(QuickNoteItem item) {
+        mListener.onNoteListItemClicked(item);
     }
 
     public interface OnFragmentInteractionListener {

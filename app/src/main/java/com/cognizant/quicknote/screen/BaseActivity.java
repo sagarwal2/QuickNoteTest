@@ -30,14 +30,14 @@ public class BaseActivity extends AppCompatActivity {
         initUI();
     }
 
-    public void setContentFragment(Fragment contentFragment) {
+    public void setContentFragment(Fragment contentFragment, final String TAG) {
         super.setContentView(R.layout.activity_base);
 
         ViewStub mainView = (ViewStub) findViewById(R.id.main_content);
         assert mainView != null;
         mainView.setLayoutResource(R.layout.fragment_container);
         mainView.inflate();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_layout, contentFragment, contentFragment.getClass().getSimpleName()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_layout, contentFragment, TAG).commit();
 
         initUI();
     }

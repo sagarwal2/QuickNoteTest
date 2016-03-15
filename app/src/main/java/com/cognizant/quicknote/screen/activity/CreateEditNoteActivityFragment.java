@@ -3,7 +3,10 @@ package com.cognizant.quicknote.screen.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +18,12 @@ import com.cognizant.quicknote.helper.database.DataPresenter;
 import com.cognizant.quicknote.helper.database.DataPresenterImpl;
 import com.cognizant.quicknote.model.QuickNoteItem;
 
+import java.text.DateFormat;
+
 /**
  * Note create/edit fragment.
  */
-public class CreateEditNoteActivityFragment extends Fragment {
+public class CreateEditNoteActivityFragment extends Fragment implements TextWatcher {
 
     private static final String NOTE_ITEM = "CreateEditNoteActivityFragment#NOTE_ITEM";
     private OnFragmentInteractionListener mListener;
@@ -74,6 +79,21 @@ public class CreateEditNoteActivityFragment extends Fragment {
         mNoteTitle = (EditText) view.findViewById(R.id.note_title);
         mNoteContent = (EditText) view.findViewById(R.id.note_content);
         mNoteModified = (TextView) view.findViewById(R.id.note_modified);
+
+        mNoteTitle.addTextChangedListener(this);
+        mNoteContent.addTextChangedListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        QuickNoteItem noteItem = getArguments().getParcelable(NOTE_ITEM);
+        if(noteItem != null) {
+            mNoteTitle.setText(noteItem.getTitle());
+            mNoteContent.setText(noteItem.getContent());
+            mNoteModified.setText(DateFormat.getDateTimeInstance().format(noteItem.getModified()));
+        }
     }
 
     @Override
@@ -93,6 +113,10 @@ public class CreateEditNoteActivityFragment extends Fragment {
         mListener = null;
     }
 
+    private void notifyMessage(String message) {
+        Snackbar.make(getView(),message, Snackbar.LENGTH_LONG).show();
+    }
+
     public void deleteNote() {
         dataPresenter.deleteNote(getQuickNote(), new DataPresenter.onNoteUpdateCallback() {
             @Override
@@ -104,7 +128,7 @@ public class CreateEditNoteActivityFragment extends Fragment {
 
             @Override
             public void onError(Exception e) {
-
+                notifyMessage(e.getMessage());
             }
         });
     }
@@ -120,9 +144,24 @@ public class CreateEditNoteActivityFragment extends Fragment {
 
             @Override
             public void onError(Exception e) {
-
+                notifyMessage(e.getMessage());
             }
         });
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        mListener.onNoteEdited();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 
     public interface OnFragmentInteractionListener {
